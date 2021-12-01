@@ -10,7 +10,7 @@ MINOR_VERSION = 0
 # SDL_LIB   = SDL2 SDL2main SDL2_image
 LIBRARIES = 
 
-CXXFLAGS = `cat $(LIB_DIR)Cflags`
+CXXFLAGS = `cat $(LIB_DIR)Cflags` -I$(LIB_DIR)
 SANFLAGS = `cat $(LIB_DIR)SanitizeFlags`
 LXXFLAGS = -L$(LIB_DIR) $(addprefix -l, $(LIBRARIES))
 
@@ -61,7 +61,7 @@ deps: $(addprefix $(BIN_DIR), $(DEP))
 	echo "Deps builded"
 	
 $(BIN_DIR)%.d : $(SRC_DIR)%.cpp
-	g++ -MM -MT $(@:.d=.o) $< -o $@
+	g++ -MM -MT $(@:.d=.o) $< -o $@ -I$(LIB_DIR)
 
 -include $(addprefix $(BIN_DIR), $(DEP))
 

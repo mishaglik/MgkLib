@@ -45,60 +45,60 @@ extern const Logger* const MGK_LOGGER;
 #define GLOBAL_LOG_LEVEL DEBUG
 #endif
 
-#define LOGGER_MESSAGE(level, format, ...) logger_log(MGK_LOGGER, level, format, ## __VA_ARGS__)
-#define LOGGER_STYLE(style) logger_style(MGK_LOGGER, style)
+#define LOG_MESSAGE(level, format, ...) logger_log(MGK_LOGGER, level, format, ## __VA_ARGS__)
+#define LOG_STYLE(style) logger_style(MGK_LOGGER, style)
 
-#define LOGGER_INC_TAB(...) incTab(__VA_ARGS__)
-#define LOGGER_DEC_TAB(...) decTab(__VA_ARGS__)
-#define LOGGER_SET_TAB(...) setTab(__VA_ARGS__)
+#define LOG_INC_TAB(...) incTab(__VA_ARGS__)
+#define LOG_DEC_TAB(...) decTab(__VA_ARGS__)
+#define LOG_SET_TAB(...) setTab(__VA_ARGS__)
 
 #if GLOBAL_LOG_LEVEL <= DEBUG
 
-#define LOGGER_DEBUG(format, ...)   LOGGER_MESSAGE(DEBUG  , format, ## __VA_ARGS__)
-#define LOGGER_INFO(format, ...)    LOGGER_MESSAGE(INFO   , format, ## __VA_ARGS__)
-#define LOGGER_WARNING(format, ...) LOGGER_MESSAGE(WARNING, format, ## __VA_ARGS__)
-#define LOGGER_ERROR(format, ...)   LOGGER_MESSAGE(ERROR  , format, ## __VA_ARGS__)
-#define LOGGER_FATAL(format, ...)   LOGGER_MESSAGE(FATAL  , format, ## __VA_ARGS__)
+#define LOG_DEBUG(format, ...)   LOG_MESSAGE(DEBUG  , format, ## __VA_ARGS__)
+#define LOG_INFO(format, ...)    LOG_MESSAGE(INFO   , format, ## __VA_ARGS__)
+#define LOG_WARNING(format, ...) LOG_MESSAGE(WARNING, format, ## __VA_ARGS__)
+#define LOG_ERROR(format, ...)   LOG_MESSAGE(ERROR  , format, ## __VA_ARGS__)
+#define LOG_FATAL(format, ...)   LOG_MESSAGE(FATAL  , format, ## __VA_ARGS__)
 
 #elif GLOBAL_LOG_LEVEL <= INFO
 
-#define LOGGER_DEBUG(format, ...)   /*********************************************/
-#define LOGGER_INFO(format, ...)    LOGGER_MESSAGE(INFO   , format, ## __VA_ARGS__)
-#define LOGGER_WARNING(format, ...) LOGGER_MESSAGE(WARNING, format, ## __VA_ARGS__)
-#define LOGGER_ERROR(format, ...)   LOGGER_MESSAGE(ERROR  , format, ## __VA_ARGS__)
-#define LOGGER_FATAL(format, ...)   LOGGER_MESSAGE(FATAL  , format, ## __VA_ARGS__)
+#define LOG_DEBUG(format, ...)   /******************************************/
+#define LOG_INFO(format, ...)    LOG_MESSAGE(INFO   , format, ## __VA_ARGS__)
+#define LOG_WARNING(format, ...) LOG_MESSAGE(WARNING, format, ## __VA_ARGS__)
+#define LOG_ERROR(format, ...)   LOG_MESSAGE(ERROR  , format, ## __VA_ARGS__)
+#define LOG_FATAL(format, ...)   LOG_MESSAGE(FATAL  , format, ## __VA_ARGS__)
 
 #elif GLOBAL_LOG_LEVEL <= WARNING
 
-#define LOGGER_DEBUG(format, ...)   /*********************************************/
-#define LOGGER_INFO(format, ...)    /*********************************************/
-#define LOGGER_WARNING(format, ...) LOGGER_MESSAGE(WARNING, format, ## __VA_ARGS__)
-#define LOGGER_ERROR(format, ...)   LOGGER_MESSAGE(ERROR  , format, ## __VA_ARGS__)
-#define LOGGER_FATAL(format, ...)   LOGGER_MESSAGE(FATAL  , format, ## __VA_ARGS__)
+#define LOG_DEBUG(format, ...)   /******************************************/
+#define LOG_INFO(format, ...)    /******************************************/
+#define LOG_WARNING(format, ...) LOG_MESSAGE(WARNING, format, ## __VA_ARGS__)
+#define LOG_ERROR(format, ...)   LOG_MESSAGE(ERROR  , format, ## __VA_ARGS__)
+#define LOG_FATAL(format, ...)   LOG_MESSAGE(FATAL  , format, ## __VA_ARGS__)
 
 #elif GLOBAL_LOG_LEVEL <= ERROR
 
-#define LOGGER_DEBUG(format, ...)   /*********************************************/
-#define LOGGER_INFO(format, ...)    /*********************************************/
-#define LOGGER_WARNING(format, ...) /*********************************************/
-#define LOGGER_ERROR(format, ...)   LOGGER_MESSAGE(ERROR  , format, ## __VA_ARGS__)
-#define LOGGER_FATAL(format, ...)   LOGGER_MESSAGE(FATAL  , format, ## __VA_ARGS__)
+#define LOG_DEBUG(format, ...)   /******************************************/
+#define LOG_INFO(format, ...)    /******************************************/
+#define LOG_WARNING(format, ...) /******************************************/
+#define LOG_ERROR(format, ...)   LOG_MESSAGE(ERROR  , format, ## __VA_ARGS__)
+#define LOG_FATAL(format, ...)   LOG_MESSAGE(FATAL  , format, ## __VA_ARGS__)
 
 #elif GLOBAL_LOG_LEVEL <= FATAL
 
-#define LOGGER_DEBUG(format, ...)   /*********************************************/
-#define LOGGER_INFO(format, ...)    /*********************************************/
-#define LOGGER_WARNING(format, ...) /*********************************************/
-#define LOGGER_ERROR(format, ...)   /*********************************************/
-#define LOGGER_FATAL(format, ...)   LOGGER_MESSAGE(FATAL  , format, ## __VA_ARGS__)
+#define LOG_DEBUG(format, ...)   /******************************************/
+#define LOG_INFO(format, ...)    /******************************************/
+#define LOG_WARNING(format, ...) /******************************************/
+#define LOG_ERROR(format, ...)   /******************************************/
+#define LOG_FATAL(format, ...)   LOG_MESSAGE(FATAL  , format, ## __VA_ARGS__)
 
 #else 
 
-#define LOGGER_DEBUG(format, ...)   /*********************************************/
-#define LOGGER_INFO(format, ...)    /*********************************************/
-#define LOGGER_WARNING(format, ...) /*********************************************/
-#define LOGGER_ERROR(format, ...)   /*********************************************/
-#define LOGGER_FATAL(format, ...)   /*********************************************/
+#define LOG_DEBUG(format, ...)   /******************************************/
+#define LOG_INFO(format, ...)    /******************************************/
+#define LOG_WARNING(format, ...) /******************************************/
+#define LOG_ERROR(format, ...)   /******************************************/
+#define LOG_FATAL(format, ...)   /******************************************/
 
 #endif
 
