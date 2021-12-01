@@ -49,8 +49,8 @@ all: $(TARGETS)
 
 .PHONY: lib
 lib: $(addprefix $(BIN_DIR), $(OBJ))
-	ar crf $(BIN_DIR)LibMGK.a $^
-	cp $(BIN_DIR)LibMGK.a $(LIB_DIR)
+	ar crf $(BIN_DIR)libMGK.a $^
+	cp $(BIN_DIR)libMGK.a $(LIB_DIR)
 	cp $(addprefix $(SRC_DIR), $(HEADERS)) $(LIB_DIR)MGK
 
 $(BIN_DIR)%.o : $(SRC_DIR)%.cpp

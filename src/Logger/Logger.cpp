@@ -74,8 +74,9 @@ void logger_print_header(const Logger* logger, errlvl_t level){
         case FATAL:   STYLE(ConsoleStyle::RED);     break;
         default:                                    break;
     }
-    RAW("%5s]", getLevelString(level));
+    RAW("%5s", getLevelString(level));
     STYLE(ConsoleStyle::NONE);
+    RAW("]");
 }
 
 const char* getLevelString(errlvl_t lvl){
@@ -143,4 +144,6 @@ void logger_log(const Logger* logger, errlvl_t level, const char* format, ...){
         vfprintf(stderr,          format + shift, ap);
     if(logger->logFile)
         vfprintf(logger->logFile, format + shift, ap2);
+    va_end(ap);
+    va_end(ap2);
 }
