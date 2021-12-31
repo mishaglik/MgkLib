@@ -39,6 +39,14 @@ struct Logger
     int nTabs = 1;
 };
 
+class _AUTO_LOG_TAB{
+    public:
+    _AUTO_LOG_TAB();
+    ~_AUTO_LOG_TAB();
+};
+
+#define $TAB _AUTO_LOG_TAB _mgk_auto_log_tab();
+
 extern const Logger* const MGK_LOGGER;
 
 #ifndef GLOBAL_LOG_LEVEL
@@ -47,6 +55,7 @@ extern const Logger* const MGK_LOGGER;
 
 #define LOG_MESSAGE(level, format, ...) logger_log(MGK_LOGGER, level, format, ## __VA_ARGS__)
 #define LOG_STYLE(style) logger_style(MGK_LOGGER, style)
+#define LOG_FILLER(...)  logger_filler(MGK_LOGGER, ##__VA_ARGS__);
 
 #define LOG_INC_TAB(...) incTab(__VA_ARGS__)
 #define LOG_DEC_TAB(...) decTab(__VA_ARGS__)
@@ -123,4 +132,6 @@ const char* getLevelString(errlvl_t lvl);
 const char* getStyleStr(ConsoleStyle color);
 
 void logger_style(const Logger* logger, ConsoleStyle style);
+
+void logger_filler(const Logger* logger, const char* text = NULL);
 #endif

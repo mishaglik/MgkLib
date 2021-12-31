@@ -7,7 +7,7 @@ Logger MGK_LOGGER_OBJ = {NULL, ConsoleOutputMode::FANCY, 0};
 
 const Logger* const MGK_LOGGER = &MGK_LOGGER_OBJ;
 
-#define RAW(format, ...) {if(logger->consoleOutput != ConsoleOutputMode::NONE) fprintf(stderr, format, ## __VA_ARGS__); if(logger->logFile) fprintf(logger->logFile, format, ## __VA_ARGS__);}
+#define RAW(format, ...) {if(logger->consoleOutput != ConsoleOutputMode::NONE) fprintf(stderr, format, ## __VA_ARGS__); if(logger->logFile) {fprintf(logger->logFile, format, ## __VA_ARGS__); fflush(logger->logFile);}}
 #define STYLE(style) logger_style(logger, style)
 
 void incTab(int n){
@@ -76,7 +76,7 @@ void logger_print_header(const Logger* logger, errlvl_t level){
     }
     RAW("%5s", getLevelString(level));
     STYLE(ConsoleStyle::NONE);
-    RAW("]");
+    RAW("] ");
 }
 
 const char* getLevelString(errlvl_t lvl){
@@ -127,7 +127,7 @@ void logger_log(const Logger* logger, errlvl_t level, const char* format, ...){
 
     va_list ap, ap2;
     va_start(ap, format);
-    va_copy(ap, ap2);
+    va_copy(ap2, ap);
     
     int shift = 0;
 
@@ -146,4 +146,18 @@ void logger_log(const Logger* logger, errlvl_t level, const char* format, ...){
         vfprintf(logger->logFile, format + shift, ap2);
     va_end(ap);
     va_end(ap2);
+    fflush(logger->logFile);
+}
+
+void logger_filler(const Logger* logger, const char* text){
+    if(text == NULL) text = "";
+    RAW("\n\n\n#######################################%s#####################################\n\n", text);
+}
+
+_AUTO_LOG_TAB::_AUTO_LOG_TAB(){
+    incTab();
+}
+
+_AUTO_LOG_TAB::~_AUTO_LOG_TAB(){
+    decTab();
 }

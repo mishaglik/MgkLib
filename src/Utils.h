@@ -32,7 +32,7 @@ struct DBG_Location
 
 #define LOG_CUR_LOCATION    LOG_DEBUG("From file \"%s\" function %s(%d)", __FILE__, __func__, __LINE__)
 
-#define LOG_ASSERT(x) (x) ? void(0) : ({LOG_FATAL("%s:%d Assertion \"%s\" failed.", __FILE__, __LINE__, #x); abort(0)})
+#define LOG_ASSERT(x) (x) ? void(0) : ({LOG_FATAL("%s:%d Assertion \"%s\" failed.", __FILE__, __LINE__, #x); abort();})
 #endif
 #else
 
@@ -49,8 +49,8 @@ struct DBG_Location
 #endif
 
 #ifdef __GNUC__
-#define mgk_calloc(n, sz)  ({void* ptr =  calloc((n), (sz)); LOG_ASSERT(ptr != NULL && "Bad calloc on line:" && __LINE__ && "in file:" && __FILE__); ptr;})
-#define mgk_realloc(old_ptr, n, sz) ({void* ptr = realloc(old_ptr, (n) * (sz)); LOG_ASSERT(ptr != NULL && "Bad calloc on line:" && __LINE__ && "in file:" && __FILE__); ptr;})
+#define mgk_calloc(n, sz)  ({void* _ptr =  calloc((n), (sz)); LOG_ASSERT(_ptr != NULL && "Bad calloc on line:" && __LINE__ && "in file:" && __FILE__); _ptr;})
+#define mgk_realloc(old_ptr, n, sz) ({void* _ptr = realloc(old_ptr, (n) * (sz)); LOG_ASSERT(_ptr != NULL && "Bad calloc on line:" && __LINE__ && "in file:" && __FILE__); _ptr;})
 #else
 #error "You must use gcc compliler"
 #endif
